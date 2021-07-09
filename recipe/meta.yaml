@@ -15,9 +15,11 @@ source:
   sha256: bd90c3eb96bee996206b83be7065c9ce19aef38c3f4fb53073ada0d0b69bbce3
   patches:
     - expose_symbols.patch  # [win]
+    - fix_missing_ldflags.patch   # [unix]
+    - copyright.txt.patch
 
 build:
-  number: 0
+  number: 1
   run_exports:
     # sometimes adds new symbols.  Default behavior is OK.
     #    https://abi-laboratory.pro/tracker/timeline/sqlite/

@@ -1,0 +1,13 @@
+diff --git a/configure b/configure
+index 009d1fa..69e9f37 100755
+--- a/configure
++++ b/configure
+@@ -10103,7 +10103,7 @@ _LT_EOF
+ 	*Sun\ F*)			# Sun Fortran 8.3
+ 	  tmp_sharedflag='-G' ;;
+ 	esac
+-	archive_cmds='$CC '"$tmp_sharedflag""$tmp_addflag"' $libobjs $deplibs $compiler_flags $wl-soname $wl$soname -o $lib'
++	archive_cmds='$CC '"$tmp_sharedflag""$tmp_addflag"' $libobjs -z relro -z now $deplibs $compiler_flags $wl-soname $wl$soname -o $lib'
+ 
+         if test yes = "$supports_anon_versioning"; then
+           archive_expsym_cmds='echo "{ global:" > $output_objdir/$libname.ver~
