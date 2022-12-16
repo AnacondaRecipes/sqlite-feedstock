@@ -15,9 +15,10 @@ source:
   sha256: 0333552076d2700c75352256e91c78bf5cd62491589ba0c69aed0a81868980e7
   patches:
     - expose_symbols.patch  # [win]
+    - 0001-Fix-safe-mode-authorizer-callback-to-reject-disallowed-UDFs.patch
 
 build:
-  number: 0
+  number: 1
   run_exports:
     # sometimes adds new symbols.  Default behavior is OK.
     #    https://abi-laboratory.pro/tracker/timeline/sqlite/
@@ -31,6 +32,7 @@ requirements:
     - make      # [not win]
     - libtool   # [not win]
     - m2-patch  # [win]
+    - patch     # [not win]
   host:
     - ncurses   # [not win]
     - readline  # [not win]
@@ -50,6 +52,14 @@ test:
     - if not exist %PREFIX%\\Library\include\sqlite3ext.h exit 1  # [win]
     - test -f $PREFIX/include/sqlite3.h                           # [not win]
     - test -f $PREFIX/include/sqlite3ext.h                        # [not win]
+    # 2022-12-16: Test if --safe does not prevent writefile() and readfile()
+    # Remove it when the release >=3.40.1 is out.
+    - sqlite3 --safe ":memory:" "SELECT writefile('secret.txt', randomblob(5))" || true  # [not win]
+    - sqlite3 --safe ":memory:" "SELECT readfile('secret.txt')" || true                  # [not win]
+    - cat secret.txt || true                                                             # [not win]
+    - sqlite3 --safe ":memory:" "SELECT writefile('secret.txt', randomblob(5))" || cmd /K "exit /b 0"  # [win]
+    - sqlite3 --safe ":memory:" "SELECT readfile('secret.txt')" || cmd /K "exit /b 0"                  # [win]
+    - cat secret.txt  || cmd /K "exit /b 0"                                                            # [win]
 
 about:
   home: https://www.sqlite.org/

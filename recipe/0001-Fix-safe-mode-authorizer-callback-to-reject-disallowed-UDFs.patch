@@ -1,0 +1,34 @@
+From 840fef1bd48ffb0dd407ad263dd1f575d96dd231 Mon Sep 17 00:00:00 2001
+From: Serhii Kupriienko <skupriienko@anaconda.com>
+Date: Fri, 16 Dec 2022 14:27:05 +0200
+Subject: [PATCH] Fix -safe cli
+
+---
+ shell.c | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/shell.c b/shell.c
+index 6280ebf..a6a83c7 100644
+--- a/shell.c
++++ b/shell.c
+@@ -16275,7 +16275,7 @@ static int safeModeAuth(
+     "zipfile",
+     "zipfile_cds",
+   };
+-  UNUSED_PARAMETER(zA2);
++  UNUSED_PARAMETER(zA1);
+   UNUSED_PARAMETER(zA3);
+   UNUSED_PARAMETER(zA4);
+   switch( op ){
+@@ -16290,7 +16290,7 @@ static int safeModeAuth(
+     case SQLITE_FUNCTION: {
+       int i;
+       for(i=0; i<ArraySize(azProhibitedFunctions); i++){
+-        if( sqlite3_stricmp(zA1, azProhibitedFunctions[i])==0 ){
++        if( sqlite3_stricmp(zA2, azProhibitedFunctions[i])==0 ){
+           failIfSafeMode(p, "cannot use the %s() function in safe mode",
+                          azProhibitedFunctions[i]);
+         }
+-- 
+2.34.1
+
