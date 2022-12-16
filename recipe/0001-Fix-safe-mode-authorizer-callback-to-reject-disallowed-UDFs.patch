@@ -1,5 +1,5 @@
 From 840fef1bd48ffb0dd407ad263dd1f575d96dd231 Mon Sep 17 00:00:00 2001
-From: Serhii Kupriienko <skupriienko@anaconda.com>
+From: Serhii Kupriienko
 Date: Fri, 16 Dec 2022 14:27:05 +0200
 Subject: [PATCH] Fix -safe cli
 
