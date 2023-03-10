@@ -56,7 +56,6 @@ about:
   home: https://www.sqlite.org/
   license: blessing
   license_file: LICENSE.md
-  license_url: https://www.sqlite.org/copyright.html
   license_family: Other
   summary: Implements a self-contained, zero-configuration, SQL database engine
   description: |
@@ -64,7 +63,6 @@ about:
     public-domain, SQL database engine. It is the most used database engine
     in the world.
   doc_url: https://www.sqlite.org/docs.html
-  doc_source_url: https://sqlite.org/src/dir?ci=trunk&name=doc
   dev_url: https://sqlite.org/src/dir?ci=trunk
 
 extra:
