@@ -33,12 +33,12 @@ requirements:
     - libtool   # [not win]
     - m2-patch  # [win]
   host:
-    - ncurses   6.4  # [not win]
-    - readline  {{readline}} # [not win]
-    - zlib      {{zlib}}     # [not win]
+    - ncurses 6.4  # [not win]
+    - readline {{readline}}  # [not win]
+    - zlib {{zlib}}  # [not win]
   run:
-    - {{ pin_compatible('readline') }}  # [not win]
-    - {{ pin_compatible('zlib') }}      # [not win]
+    - readline >=8.1.2,<9.0  # [not win]
+    - zlib >=1.2.13,<1.3.0  # [not win]
 
 test:
   commands:
