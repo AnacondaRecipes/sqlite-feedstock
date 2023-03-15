@@ -23,8 +23,6 @@ build:
     # sometimes adds new symbols.  Default behavior is OK.
     #    https://abi-laboratory.pro/tracker/timeline/sqlite/
     - {{ pin_subpackage('sqlite') }}
-  ignore_run_exports:
-    - ncurses
 
 requirements:
   build:
@@ -34,11 +32,13 @@ requirements:
     - m2-patch  # [win]
   host:
     - ncurses 6.4  # [not win]
-    - readline {{readline}}  # [not win]
-    - zlib {{zlib}}  # [not win]
+    - readline 8.0  # [not ((linux and aarch64) or (osx and arm64) or win)]
+    - readline 8.1  # [(linux and aarch64) or (osx and arm64)]
+    - zlib 1.2  # [not win]
   run:
-    - readline >=8.1.2,<9.0  # [not win]
-    - zlib >=1.2.13,<1.3.0  # [not win]
+    - {{ pin_compatible('ncurses') }}   # [not win]
+    - {{ pin_compatible('readline') }}  # [not win]
+    - {{ pin_compatible('zlib') }}      # [not win]
 
 test:
   commands:
