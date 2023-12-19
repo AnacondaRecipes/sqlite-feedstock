@@ -1,0 +1,4 @@
+readline_mode:
+  - readline
+  - editline
+  - none

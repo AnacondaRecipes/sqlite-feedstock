@@ -23,6 +23,9 @@ build:
     # sometimes adds new symbols.  Default behavior is OK.
     #    https://abi-laboratory.pro/tracker/timeline/sqlite/
     - {{ pin_subpackage('sqlite') }}
+  skip: true # [win and readline_mode != 'none']
+  script_env:
+    - READLINE_MODE={{ readline_mode }}
 
 requirements:
   build:
@@ -31,13 +34,14 @@ requirements:
     - libtool   # [not win]
     - m2-patch  # [win]
   host:
-    - ncurses 6.4  # [not win]
-    - readline 8.0  # [not ((linux and aarch64) or (osx and arm64) or win)]
-    - readline 8.1  # [(linux and aarch64) or (osx and arm64)]
-    - zlib 1.2  # [not win]
+    - ncurses 6.4 # [readline_mode != 'none']
+    - readline {{ readline }}  # [readline_mode == 'readline']
+    - libedit # [readline_mode == 'editline']
+    - zlib {{ zlib }}  # [not win]
   run:
-    - {{ pin_compatible('ncurses') }}   # [not win]
-    - {{ pin_compatible('readline') }}  # [not win]
+    - {{ pin_compatible('ncurses') }}   # [readline_mode != 'none']
+    - {{ pin_compatible('readline') }}  # [readline_mode == 'readline']
+    - {{ pin_compatible('libedit') }}   # [readline_mode == 'editline']
     - {{ pin_compatible('zlib') }}      # [not win]
 
 test:
