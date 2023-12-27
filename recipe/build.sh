@@ -29,9 +29,9 @@ if [[ "$target_platform" == "linux-ppc64le" ]]; then
     export PPC64LE="--build=ppc64le-linux"
 fi
 
-if [ "$READLINE_MODE" = readline ]; then
+if [[ "${READLINE_MODE}" = readline ]]; then
     READLINE_ARGS="--enable-readline --disable-editline"
-elif [ "$READLINE_MODE" = editline ]; then
+elif [[ "${READLINE_MODE}" = editline ]]; then
     READLINE_ARGS="--disable-readline --enable-editline"
 else
     READLINE_ARGS="--disable-readline --disable-editline"

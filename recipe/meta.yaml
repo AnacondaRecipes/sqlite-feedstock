@@ -1,11 +1,15 @@
 {% set version = "3.42.0" %}
-{% set build = "0" %}
+{% set build = "1" %}
 {% set year = "2023" %}
 {% set version_split = version.split(".") %}
 {% set major = version_split[0] %}
 {% set minor = version_split[1]|int * 10 %}
 {% set bugfix = version_split[2]|int * 100 %}
 {% set version_coded=(major ~ (("%03d" % minor)|string) ~ (("%03d" % bugfix)|string)) %}
+
+{% set rl_string = "" %}       # [win or readline_mode == 'readline']
+{% set rl_string = "el_" %}    # [not win and readline_mode == 'editline']
+{% set rl_string = "norl_" %}  # [not win and readline_mode == 'none']
 
 package:
   name: sqlite
@@ -26,6 +30,7 @@ build:
   skip: true # [win and readline_mode != 'none']
   script_env:
     - READLINE_MODE={{ readline_mode }}
+  string: h{{ PKG_HASH }}_{{ rl_string }}{{ PKG_BUILDNUM }}
 
 requirements:
   build:
