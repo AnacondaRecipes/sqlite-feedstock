@@ -1,5 +1,5 @@
 {% set version = "3.42.0" %}
-{% set build = "1" %}
+{% set build = 1 %}
 {% set year = "2023" %}
 {% set version_split = version.split(".") %}
 {% set major = version_split[0] %}
@@ -22,7 +22,8 @@ source:
     - expose_symbols.patch  # [win]
 
 build:
-  number: {{ build }}
+  number: {{ build + 100 }}  # [win or readline_mode == 'readline']
+  number: {{ build }}        # [not (win or readline_mode == 'readline')]
   run_exports:
     # sometimes adds new symbols.  Default behavior is OK.
     #    https://abi-laboratory.pro/tracker/timeline/sqlite/
