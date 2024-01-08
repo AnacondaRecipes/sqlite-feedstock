@@ -22,8 +22,9 @@ source:
     - expose_symbols.patch  # [win]
 
 build:
-  number: {{ build + 100 }}  # [win or readline_mode == 'readline']
-  number: {{ build }}        # [not (win or readline_mode == 'readline')]
+  number: {{ build + 200 }}  # [win or readline_mode == 'readline']
+  number: {{ build + 100 }}  # [not win and readline_mode == 'editline']
+  number: {{ build }}        # [not win and readline_mode == 'none']
   run_exports:
     # sometimes adds new symbols.  Default behavior is OK.
     #    https://abi-laboratory.pro/tracker/timeline/sqlite/
