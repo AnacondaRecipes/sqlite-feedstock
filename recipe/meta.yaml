@@ -43,14 +43,17 @@ requirements:
 test:
   commands:
     - sqlite3 --version
+    - if not exist %PREFIX%\\Library\bin\sqlite3.exe exit 1       # [win]
     - if not exist %PREFIX%\\Library\bin\sqlite3.dll exit 1       # [win]
     - if not exist %PREFIX%\\Library\lib\sqlite3.lib exit 1       # [win]
+    - test -f $PREFIX/bin/sqlite3                                 # [not win]
     - test -f $PREFIX/lib/libsqlite3${SHLIB_EXT}                  # [not win]
     - test ! -f $PREFIX/lib/libsqlite3.a                          # [not win]
     - if not exist %PREFIX%\\Library\include\sqlite3.h exit 1     # [win]
     - if not exist %PREFIX%\\Library\include\sqlite3ext.h exit 1  # [win]
     - test -f $PREFIX/include/sqlite3.h                           # [not win]
     - test -f $PREFIX/include/sqlite3ext.h                        # [not win]
+    - test -f $PREFIX/lib/pkgconfig/sqlite3.pc                    # [not win]
 
 about:
   home: https://www.sqlite.org/
