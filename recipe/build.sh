@@ -21,9 +21,9 @@ export CPPFLAGS="${CPPFLAGS} -DSQLITE_ENABLE_COLUMN_METADATA=1 \
 export SONAME_SWITCH=""
 if [[ $target_platform =~ linux.* ]]; then
     export CFLAGS="${CFLAGS} -DHAVE_PREAD64 -DHAVE_PWRITE64"
-    # Following upstream project build system migration to setuptools in v3.49.0, soname is no longer
-    # set for shared object. Use a flag to restore previous soname. "legacy" value
-    # sets soname to its historical value of "libsqlite3.so.0".
+    # Following upstream project build system migration to autosetup in v3.49.0, soname is no longer
+    # set. Use a flag with "legacy" value to sets soname to its historical value of "libsqlite3.so.0".
+    # Reference: https://github.com/conda-forge/sqlite-feedstock/issues/146
     export SONAME_SWITCH="--soname=legacy"
 fi
 
