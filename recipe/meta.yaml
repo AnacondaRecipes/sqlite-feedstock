@@ -40,6 +40,8 @@ requirements:
     - {{ pin_compatible('zlib') }}      # [not win]
 
 test:
+  requires:
+    - binutils  # [linux]
   commands:
     - sqlite3 --version
     - if not exist %PREFIX%\\Library\bin\sqlite3.exe exit 1       # [win]
@@ -53,6 +55,8 @@ test:
     - test -f $PREFIX/include/sqlite3.h                           # [not win]
     - test -f $PREFIX/include/sqlite3ext.h                        # [not win]
     - test -f $PREFIX/lib/pkgconfig/sqlite3.pc                    # [not win]
+    # make sure that soname is set
+    - readelf -d $PREFIX/lib/libsqlite3${SHLIB_EXT} | grep SONAME # [linux]
 
 about:
   home: https://www.sqlite.org/
