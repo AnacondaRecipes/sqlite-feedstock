@@ -1,0 +1,4 @@
+# For testing we only need one python
+# otherwise it creates problems on PBP
+python:
+  - "3.11"
