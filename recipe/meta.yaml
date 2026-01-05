@@ -18,6 +18,7 @@ source:
 
 build:
   number: 0
+  string: h{{ PKG_HASH }}_{{ PKG_BUILDNUM }}
   run_exports:
     # sometimes adds new symbols.  Default behavior is OK.
     #    https://abi-laboratory.pro/tracker/timeline/sqlite/
