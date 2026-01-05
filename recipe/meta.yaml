@@ -18,6 +18,7 @@ source:
 
 build:
   number: 0
+  string: h{{ PKG_HASH }}_{{ PKG_BUILDNUM }}
   run_exports:
     # sometimes adds new symbols.  Default behavior is OK.
     #    https://abi-laboratory.pro/tracker/timeline/sqlite/
@@ -39,9 +40,11 @@ requirements:
 
 test:
   requires:
+    - python
     - binutils  # [linux]
   commands:
     - sqlite3 --version
+    - python -c "import sqlite3; print(sqlite3.sqlite_version)"
     - if not exist %PREFIX%\\Library\bin\sqlite3.exe exit 1       # [win]
     - if not exist %PREFIX%\\Library\bin\sqlite3.dll exit 1       # [win]
     - if not exist %PREFIX%\\Library\lib\sqlite3.lib exit 1       # [win]
