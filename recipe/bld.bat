@@ -11,6 +11,7 @@ cl ^
     /DSQLITE_ENABLE_COLUMN_METADATA=1 ^
     /DSQLITE_MAX_VARIABLE_NUMBER=250000 ^
     /DSQLITE_ENABLE_FTS5 ^
+    /DSQLITE_ENABLE_UNLOCK_NOTIFY ^
     shell.c sqlite3.c -Fesqlite3.exe ^
     /DSQLITE_EXPORTS
 
@@ -22,6 +23,7 @@ cl ^
     /DSQLITE_MAX_VARIABLE_NUMBER=250000 ^
     /DSQLITE_ENABLE_JSON1 ^
     /DSQLITE_ENABLE_FTS5 ^
+    /DSQLITE_ENABLE_UNLOCK_NOTIFY ^
     sqlite3.c -link -dll -out:sqlite3.dll
 
 COPY sqlite3.exe  %LIBRARY_BIN% || exit 1
