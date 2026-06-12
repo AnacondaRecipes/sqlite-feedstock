@@ -3,3 +3,5 @@ upstream_sources:
   - webpage:
       url: https://www.sqlite.org/index.html
       regex: releaselog/(\d+_\d+_\d+)\.html
+      from_pattern: ^(\d+)_(\d+)_(\d+)$
+      to_pattern: \1.\2.\3
