@@ -40,7 +40,7 @@ requirements:
 
 test:
   requires:
-    - python
+    - python 3.12
     - binutils  # [linux]
   commands:
     - sqlite3 --version
