@@ -83,4 +83,6 @@ extra:
     - mingwandroid
     - xylar
   skip-lints:
+    # somehow linter not able to check source url,
+    # but it is reachable and valid
     - reachable_url
