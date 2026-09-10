@@ -82,3 +82,5 @@ extra:
     - snorfalorpagus
     - mingwandroid
     - xylar
+  skip-lints:
+    - reachable_url
