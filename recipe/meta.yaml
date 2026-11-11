@@ -1,5 +1,5 @@
 {% set name = "sqlite" %}
-{% set version = "3.53.4" %}
+{% set version = "3.54.1" %}
 {% set year = "2026" %}
 {% set version_split = version.split(".") %}
 {% set major = version_split[0] %}
@@ -13,7 +13,7 @@ package:
 
 source:
   url: https://www.sqlite.org/{{ year }}/{{ name }}-autoconf-{{ version_coded }}.tar.gz
-  sha256: 0e9483900e92cd5de8fd48d16bf9200145a61f7fd5be542a5ac81d8a9516eb9c
+  sha256: 926ef8d3eab93fbf6e06011901273eec076b25594a4e1cdadd50c987f4f6d64e
   patches:
     - expose_symbols.patch  # [win]
 
@@ -46,6 +46,11 @@ test:
   commands:
     - sqlite3 --version
     - python -c "import sqlite3; print(sqlite3.sqlite_version)"
+    # Upstream test suite is Tcl-based (testfixture/tclsh) and cannot run inside the conda test env.
+    # Verify that the optional extensions enabled in build.sh are compiled into the library.
+    - 'sqlite3 :memory: "create virtual table fts using fts5(content); select 1;"'
+    - 'sqlite3 :memory: "create virtual table geo using geopoly(); select 1;"'
+    - 'sqlite3 :memory: "create virtual table rt using rtree(id, minX, maxX); select 1;"'
     - if not exist %PREFIX%\\Library\bin\sqlite3.exe exit 1       # [win]
     - if not exist %PREFIX%\\Library\bin\sqlite3.dll exit 1       # [win]
     - if not exist %PREFIX%\\Library\lib\sqlite3.lib exit 1       # [win]
