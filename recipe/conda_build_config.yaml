@@ -1,4 +1,13 @@
 # For testing we only need one python
 # otherwise it creates problems on PBP
+# NOTE: python is a zipped key in the aggregate CBC (python/numpy/is_freethreading/is_python_min),
+# so the full zip has to be spelled out for the subspace to be valid.
+# Python 3.11 is no longer published for win-arm64, hence 3.14 which exists on every target.
 python:
-  - "3.11"
+  - "3.14"
+numpy:
+  - 2.3
+is_freethreading:
+  - false
+is_python_min:
+  - false
